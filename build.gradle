@@ -5,6 +5,8 @@ plugins {
 allprojects {
     version = grgit.describe()
 
+    group = 'ch.mollusca'
+
     repositories {
         jcenter()
     }
