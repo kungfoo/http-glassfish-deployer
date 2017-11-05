@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+mainClassName = 'ch.mollusca.glassfish.deployer.application.SimpleDeployerApplication'
+
+dependencies {
+    compile project(path: ':deployer')
+    runtime 'org.slf4j:slf4j-simple:1.7.25'
+}
+
+task copySampleWar(type: Copy) {
+    from '../sample-war/build/libs'
+    into '.'
+}
+
+copySampleWar.dependsOn(':sample-war:build')
+run.dependsOn(copySampleWar)

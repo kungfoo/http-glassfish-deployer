@@ -1,0 +1,11 @@
+plugins {
+    id "org.ajoberstar.grgit" version "2.1.0"
+}
+
+allprojects {
+    version = grgit.describe()
+
+    repositories {
+        jcenter()
+    }
+}

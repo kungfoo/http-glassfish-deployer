@@ -1,0 +1,10 @@
+apply plugin: 'war'
+apply plugin: 'java'
+
+sourceCompatibility = 1.6
+
+dependencies {
+    providedCompile group: 'javax', name: 'javaee-api', version: '7.0'
+}
+
+war.archivePath
