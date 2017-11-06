@@ -21,6 +21,19 @@ gradlePlugin {
     }
 }
 
+pluginBundle {
+    vcsUrl = 'https://github.com/kungfoo/http-glassfish-deployer'
+    description = 'Deploy to glassfish using http and https admin console.'
+    tags = ['glassfish', 'java ee', 'jee', 'deployment']
+
+    plugins {
+        httpDeployerPlugin {
+            id = 'ch.mollusca.glassfish.http.deployer'
+            website = "https://github.com/kungfoo/http-glassfish-deployer"
+        }
+    }
+}
+
 dependencies {
     compile gradleApi()
     compile localGroovy()
