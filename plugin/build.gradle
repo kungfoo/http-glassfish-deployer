@@ -28,6 +28,7 @@ pluginBundle {
 
     plugins {
         httpDeployerPlugin {
+            displayName = "Simple deployment to glassfish over http/https"
             id = 'ch.mollusca.glassfish.http.deployer'
             website = "https://github.com/kungfoo/http-glassfish-deployer"
         }
