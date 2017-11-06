@@ -3,7 +3,7 @@ plugins {
 }
 
 allprojects {
-    version = grgit.describe()
+    version = grgit.describe() + ((grgit.status().clean) ? "" : "-dirty")
 
     group = 'ch.mollusca'
 

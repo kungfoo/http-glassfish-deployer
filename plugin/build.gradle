@@ -1,8 +1,28 @@
+plugins {
+    id 'java-gradle-plugin'
+}
+
 apply plugin: 'groovy'
+apply plugin: 'maven'
+
+jar {
+    archivesBaseName = 'http-glassfish-deployer-plugin'
+}
+
+gradlePlugin {
+    plugins {
+        httpDeployerPlugin {
+            id = 'ch.mollusca.glassfish.http.deployer'
+            implementationClass = 'ch.mollusca.glassfish.deployer.plugin.HttpDeployerPlugin'
+        }
+    }
+}
 
 dependencies {
     compile gradleApi()
     compile localGroovy()
 
     compile project(':deployer')
+
+    testCompile 'junit:junit:4.12'
 }
