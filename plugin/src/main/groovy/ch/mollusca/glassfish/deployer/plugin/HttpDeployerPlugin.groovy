@@ -10,13 +10,13 @@ class HttpDeployerPlugin implements Plugin<Project> {
 
     static final String TASK_GROUP = "deployment"
     static final String EXTENSION = "http_deployer"
-    static String PLUGIN_ID = 'ch.mollusca.glassfish.http.deployer'
+    static final String PLUGIN_ID = 'ch.mollusca.glassfish.http.deployer'
 
     @Override
     void apply(Project project) {
         project.extensions.add(EXTENSION, new HttpDeployerExtension())
-        project.task(DeployTask.TASK_NAME, type: DeployTask)
-        project.task(UndeployTask.TASK_NAME, type: UndeployTask)
+        project.task(DeployTask.TASK_NAME, type: DeployTask, description: "Deploy a deployment archive to glassfish using http/https", group: TASK_GROUP)
+        project.task(UndeployTask.TASK_NAME, type: UndeployTask, description: "Deploy a deployment archive to glassfish using http/https", group: TASK_GROUP)
     }
 
     static HttpDeployer configuredDeployer(HttpDeployerExtension extension) {
