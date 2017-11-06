@@ -90,6 +90,11 @@ public class HttpDeployer {
     }
 
     public GlassfishAdministrationResult undeploy() {
+        if(applicationName.isEmpty()) {
+            LOGGER.error("Undeploy only works with a defined applicationName!");
+            throw new IllegalArgumentException("Undeploy only works with a defined applicationName!");
+        }
+
         LOGGER.info("About to undeploy {} from {}", applicationName, host);
 
         Request request = new Request.Builder()
@@ -113,7 +118,7 @@ public class HttpDeployer {
                 return new GlassfishAdministrationResult(GlassfishAdministrationResult.ExitCode.FAILURE, response.message());
             }
         } catch (Exception e) {
-            throw new RuntimeException(String.format("Could not execute %s", request));
+            throw new RuntimeException(String.format("Could not execute %s", request), e);
         }
     }
 
