@@ -14,5 +14,5 @@ task copySampleWar(type: Copy) {
     into '.'
 }
 
-copySampleWar.dependsOn(':sample-war:build')
+copySampleWar.dependsOn(':sample-war:war')
 run.dependsOn(copySampleWar)

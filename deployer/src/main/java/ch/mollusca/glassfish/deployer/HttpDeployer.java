@@ -19,9 +19,9 @@ import java.security.cert.X509Certificate;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class SimpleDeployer {
+public class HttpDeployer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleDeployer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpDeployer.class);
 
     private final OkHttpClient client;
     private final String scheme;
@@ -33,7 +33,7 @@ public class SimpleDeployer {
     private final String user;
     private final String password;
 
-    private SimpleDeployer(boolean sslValidation, String scheme, String host, int port, boolean force, String contextRoot, String applicationName, String user, String password) {
+    private HttpDeployer(boolean sslValidation, String scheme, String host, int port, boolean force, String contextRoot, String applicationName, String user, String password) {
         this.scheme = scheme;
         this.host = host;
         this.port = port;
@@ -56,6 +56,11 @@ public class SimpleDeployer {
     }
 
     public GlassfishAdministrationResult deploy(File applicationArchive) {
+        if(!applicationArchive.exists()) {
+            LOGGER.error("Deployment archive does not exist: {}", applicationArchive.getAbsolutePath());
+            throw new IllegalArgumentException(String.format("Deployment archive %s does not exist!", applicationArchive));
+        }
+
         LOGGER.info("About to deploy {} to {}", applicationArchive, host);
 
         MediaType octetStream = MediaType.parse("application/octet-stream");
@@ -230,8 +235,8 @@ public class SimpleDeployer {
             return this;
         }
 
-        public SimpleDeployer build() {
-            return new SimpleDeployer(sslValidation, scheme, host, port, force, contextRoot, applicationName, user, password);
+        public HttpDeployer build() {
+            return new HttpDeployer(sslValidation, scheme, host, port, force, contextRoot, applicationName, user, password);
         }
     }
 }
