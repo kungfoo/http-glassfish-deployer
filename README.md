@@ -6,7 +6,9 @@
 
 ## What?
 
-This is (soon) a gradle plugin uses the glassfish admin console REST-like API to deploy apps.
+This is a gradle plugin uses the glassfish admin console REST-like API to deploy apps,
+instead of you having to click around to do it. Or rely on autodeploy (which doesn't work with properly versioned
+deployment archives...)
 
 ## How?
 
