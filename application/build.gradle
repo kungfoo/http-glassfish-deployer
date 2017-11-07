@@ -5,7 +5,7 @@ sourceCompatibility = 1.8
 mainClassName = 'ch.mollusca.glassfish.deployer.application.HttpDeployerApplication'
 
 dependencies {
-    compile project(path: ':deployer')
+    compile project(path: ':plugin')
     runtime 'org.slf4j:slf4j-simple:1.7.25'
 }
 

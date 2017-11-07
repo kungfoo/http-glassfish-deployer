@@ -1,5 +1,4 @@
-include 'application'
 include 'plugin'
+include 'application'
 include 'sample-war'
-include 'deployer'
 

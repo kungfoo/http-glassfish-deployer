@@ -4,12 +4,11 @@ plugins {
 }
 
 apply plugin: 'groovy'
-apply plugin: 'maven'
+apply plugin: 'java'
 apply plugin: "com.gradle.plugin-publish"
 
 jar {
     archivesBaseName = 'http-glassfish-deployer-plugin'
-    from (project(':deployer').sourceSets.main.output) { }
 }
 
 gradlePlugin {
@@ -38,7 +37,10 @@ pluginBundle {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    compile project(':deployer')
+
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    compile 'com.squareup.moshi:moshi:1.5.0'
+    compile 'org.slf4j:slf4j-api:1.7.25'
 
     testCompile 'junit:junit:4.12'
 }
