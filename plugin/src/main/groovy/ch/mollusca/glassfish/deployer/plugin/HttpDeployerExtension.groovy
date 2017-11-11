@@ -1,4 +1,6 @@
-package ch.mollusca.glassfish.deployer.plugin;
+package ch.mollusca.glassfish.deployer.plugin
+
+import java.util.concurrent.TimeUnit;
 
 class HttpDeployerExtension {
     boolean secure = true
@@ -14,4 +16,7 @@ class HttpDeployerExtension {
     String password = ""
 
     String deploymentArchive = ""
+    
+    long timeoutDuration = 12;
+    TimeUnit timeoutUnit = TimeUnit.SECONDS;
 }

@@ -32,8 +32,10 @@ public class HttpDeployer {
     private final String applicationName;
     private final String user;
     private final String password;
+    private final long timeoutDuration;
+    private final TimeUnit timeoutUnit;
 
-    private HttpDeployer(boolean sslValidation, String scheme, String host, int port, boolean force, String contextRoot, String applicationName, String user, String password) {
+    private HttpDeployer(boolean sslValidation, String scheme, String host, int port, boolean force, String contextRoot, String applicationName, long timeoutDuration, TimeUnit timeoutUnit, String user, String password) {
         this.scheme = scheme;
         this.host = host;
         this.port = port;
@@ -42,6 +44,8 @@ public class HttpDeployer {
         this.applicationName = applicationName;
         this.user = user;
         this.password = password;
+        this.timeoutDuration = timeoutDuration;
+        this.timeoutUnit = timeoutUnit;
 
         if (sslValidation) {
             this.client = createOkHttpClient();
@@ -168,9 +172,9 @@ public class HttpDeployer {
 
     private OkHttpClient.Builder createClientBuilder() {
         return new OkHttpClient.Builder()
-                .connectTimeout(12, TimeUnit.SECONDS)
-                .readTimeout(12, TimeUnit.SECONDS)
-                .writeTimeout(12, TimeUnit.SECONDS);
+                .connectTimeout(timeoutDuration, timeoutUnit)
+                .readTimeout(timeoutDuration, timeoutUnit)
+                .writeTimeout(timeoutDuration, timeoutUnit);
     }
 
     private OkHttpClient createOkHttpClient() {
@@ -189,6 +193,9 @@ public class HttpDeployer {
 
         private String user = "admin";
         private String password = "";
+
+        private long timeoutDuration = 12;
+        private TimeUnit timeoutUnit = TimeUnit.SECONDS;
 
         public Builder host(String host) {
             this.host = Objects.requireNonNull(host, "host cannot be null!");
@@ -240,8 +247,14 @@ public class HttpDeployer {
             return this;
         }
 
+        public Builder timeout(long duration, TimeUnit unit){
+            this.timeoutDuration = duration;
+            this.timeoutUnit = Objects.requireNonNull(unit, "timeout unit cannot be null!");
+            return this;
+        }
+
         public HttpDeployer build() {
-            return new HttpDeployer(sslValidation, scheme, host, port, force, contextRoot, applicationName, user, password);
+            return new HttpDeployer(sslValidation, scheme, host, port, force, contextRoot, applicationName, timeoutDuration, timeoutUnit, user, password);
         }
     }
 }

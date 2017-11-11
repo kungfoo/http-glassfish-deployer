@@ -24,6 +24,7 @@ class HttpDeployerPlugin implements Plugin<Project> {
                 .applicationName(extension.applicationName)
                 .contextRoot(extension.contextRoot)
                 .force(extension.force)
+                .timeout(extension.timeoutDuration, extension.timeoutUnit)
                 .host(extension.host)
                 .port(extension.port)
                 .scheme(extension.scheme)
