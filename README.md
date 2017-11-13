@@ -46,8 +46,8 @@ Other settings that are available (they all have defaults):
     force = true                # default: false        Force (re-)deployment
     contextRoot = 'sample'      # default: ''           Use a context root
     applicationName = 'sample'  # default: ''           Use a application name
-    timeoutDuration = 3         # default: 12           Use a different timeout
-    timeoutUnit                 # default: SECONDS      Use a different timeout duration unit
+    timeoutDuration = 300       # default: 12           Use a different timeout
+    timeoutUnit = MILLISECONDS  # default: SECONDS      Use a different timeout duration unit
     user = 'foo'                # default: 'admin'      Use another user name
     password = 'asdf'           # default: ''           Use a password
 
